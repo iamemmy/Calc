@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALCULATOR</title>
+    <style>
+        .calculator{
+            max-width: 400px;
+            margin: 10vh auto 0 auto;
+            box-shadow: 0px 0px 43px 17px rgba(153,153,153,1);
+            border-radius: 5px;
+            padding: 0 5px 5px 5px;
+        }
+        .result{
+            text-align: right;
+            height: 70px;
+            line-height: 70px;
+            padding: 16px 8px;
+            font-size: 25px;
+        }
+        .ac-del{
+            display: grid;
+            border-bottom: 1px solid #999;
+            border-left: 1px solid #999;
+            grid-template-columns: 1fr 1fr;
+        }
+        .buttons-cont{
+            display: grid;
+            border-bottom: 1px solid #999;
+            border-left: 1px solid #999;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+        button{
+            border: 0.5px solid #999;
+            line-height: 70px;
+            text-align: center;
+            font-size: 25px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgb(189, 187, 187);
+            transition: 0.5s ease-in-out;
+        }
+        #equals{
+            background-color: rgb(93, 93, 122);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="result"></div>
+        <div class="ac-del">
+            <button class="button">AC</button>
+            <button class="button">DEL</button>
+        </div>
+        <div class="buttons-cont">
+            <button class="button">9</button>
+            <button class="button">8</button>
+            <button class="button">7</button>
+            <button class="button">+</button>
+            <button class="button">6</button>
+            <button class="button">5</button>
+            <button class="button">4</button>
+            <button class="button">-</button>
+            <button class="button">3</button>
+            <button class="button">2</button>
+            <button class="button">1</button>
+            <button class="button">*</button>
+            <button class="button">.</button>
+            <button class="button">0</button>
+            <button class="button">/</button>
+            <button class="button" id="equals">=</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.querySelector('.result');
+        let buttons = Array.from(document.getElementsByClassName('button'));
+        
+        buttons.map( button => {
+            button.addEventListener('click', (e) => {
+                switch(e.target.innerText){
+                    case 'AC':
+                        display.innerText = '';
+                        break;
+                    case '=':
+                        try{
+                            display.innerText = eval(display.innerText);
+                        } catch {
+                            display.innerText = "Error"
+                        }
+                        break;
+                    case 'DEL':
+                        if (display.innerText){
+                        display.innerText = display.innerText.slice(0, -1);
+                        }
+                        break;
+                    default:
+                        display.innerText += e.target.innerText;
+                }
+            })
+        })
+    </script>
+</body>
+</html>
